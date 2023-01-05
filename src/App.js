@@ -6,7 +6,7 @@ const App = () => {
   const [items, setItems] = useState([]);
   const [newItem, setNewItem] = useState('');
   const [value, setValue] = useState('');
-  const [socket] = useState(() => socketio('http://localhost:8000'));
+  const [socket] = useState(() => socketio('http://diffusedhermit.com:8000'));
 
   useEffect(() => {
     socket.on('shopping-list-update', (newItems) => {
