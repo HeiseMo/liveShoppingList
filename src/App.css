@@ -1,49 +1,101 @@
 body {
   font-family: sans-serif;
-  background-color: #f5f5f5;
+  background-color: #ecf0f1;
 }
 
 h1 {
   text-align: center;
-  color: #333;
+  color: #9b59b6;
+  position: sticky;
 }
-
+.shopping-list-main{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+.clear-button {
+  /* Use a dark gray color for the button */
+  color: #666666;
+  width: 50px;
+  margin-left: 90%;
+  padding: 8px;
+  border: 1px solid #cccccc;
+  border-radius: 4px;
+  cursor: pointer;
+}
 .shopping-list {
-  max-width: 500px;
+  
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+  max-width: 1000px;
+  height: 500px;
+  overflow-y: auto;
+  overflow-x: hidden;
   margin: 20px auto;
-  background-color: #fff;
+  background-color: #ffffff;;
   padding: 20px;
   box-shadow: 0 2px 3px rgba(0,0,0,0.1);
 }
-
+.shopping-list-item-completed {
+  text-decoration: line-through;
+  color: #cccccc;
+}
+.shopping-list ul {
+  padding: 0;
+  margin: 0;
+}
 .shopping-list li {
+  width: 95%;
   list-style: none;
   padding: 10px;
   border-bottom: 1px solid #ddd;
+  overflow: auto;
 }
 
 .add-button {
   display: block;
-  width: 100%;
-  background-color: #0095ff;
+  width: 500px;
+  background-color: #9b59b6;
   color: #fff;
   text-align: center;
   text-decoration: none;
   padding: 10px 0;
   margin-top: 20px;
   cursor: pointer;
+  border: none;
 }
 
 .add-button:hover {
-  background-color: #008ae6;
+  background-color: #9c59b6d0;
 }
 .shopping-list-input {
   display: block;
-  width: 100%;
+  width: 500px;
   padding: 10px;
   font-size: 16px;
   box-sizing: border-box;
   margin-bottom: 10px;
+}
+.shopping-list-input-container{
+  width: 500px;
+}
+/* Use a smaller width for the input element on small screens */
+@media (max-width: 600px) {
+  .shopping-list-input {
+    width: 100%;
+  }
+  .shopping-list {
+    width: 90%;
+  }
+  .add-button {
+    width: 100%;
+  }
+  .shopping-list-input-container {
+    width: 90%;
+  }
 }
 
 .shopping-list-input:focus {

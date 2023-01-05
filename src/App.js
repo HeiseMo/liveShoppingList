@@ -13,8 +13,10 @@ const App = () => {
       setItems(newItems);
     });
     socket.on('complete_item_test', (item) => {
-      console.log('complete item', item, "check emit complete item");
       setItems(item)
+    });
+    socket.on('clear_items', (items) => {
+      setItems(items);
     });
     return () => {
       socket.off('shopping-list-update');
@@ -28,21 +30,25 @@ const App = () => {
     setNewItem('');
   };
   const handleComplete = (item) => {
-    console.log('complete item', item);
     socket.emit('complete_item', item);
-      //socket.emit(JSON.stringify({ type: 'complete_item', value: item }));
     };
+  const handleClear = () => {
+      socket.emit('clear_items', items);
+      };
 
   return (
-    <div>
+    <div className='shopping-list-main'>
       <h1>Shopping List</h1>
-      <div className='shopping-list'><ul>
+      <div className='shopping-list'>
+      <button class="clear-button" onClick={() => handleClear(items)}>Clear</button>
+        <ul>
         {items.map((item) => (
           <li key={item.name}
-          onClick={() => handleComplete(item)} style={{ textDecoration: item.completed ? 'line-through' : 'none', color: item.completed ? 'green' : 'inherit' }}>{item.name}</li>
+          onClick={() => handleComplete(item)} className={item.completed ? "shopping-list-item-completed" : "none"}>{item.name}</li>
         ))}
       </ul>
       </div>
+      <div className="shopping-list-input-container">
       <form onSubmit={handleSubmit}>
         <input
           className='shopping-list-input'
@@ -52,6 +58,7 @@ const App = () => {
         />
         <button className='add-button' type="submit">Add Item</button>
       </form>
+      </div>
     </div>
   );
 };

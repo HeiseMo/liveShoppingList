@@ -12,7 +12,7 @@ const io = require('socket.io')(server, {
 });
 
 
-const items = [];
+let items = [];
 io.on('connection', (socket) => {
   socket.emit('shopping-list-update', items);
 
@@ -29,19 +29,17 @@ io.on('connection', (socket) => {
   socket.on('complete_item', (item) => {
     items.map((i) => {
       if (i.id === item.id) {
-        console.log(i.completed, i.name)
-        if(i.completed === true){
-          i.completed = false;
-        }
-        i.completed = true;
+          i.completed = !i.completed;
       }
     });
-    console.log('items', items, "server.js after")
     io.emit('complete_item_test', items);
-  }
-  );
+  });
+//Handle clearing of items
+  socket.on('clear_items', (item) => {
+    items = [];
+    io.emit('complete_item_test', items);
+  });
 });
-
 server.listen(8000, () => {
   console.log('listening on *:8000');
 });
